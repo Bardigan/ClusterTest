@@ -3,7 +3,10 @@ import cors from "cors";
 import records from "./routes/record.js";
 import { dirname } from 'path'
 import path from 'path';
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const PORT = process.env.PORT || 5050;
 const app = express();
