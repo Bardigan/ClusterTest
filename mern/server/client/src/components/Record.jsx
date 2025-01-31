@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-const API = process.env.REACT_APP_API || "localhost";
+const API = import.meta.env.VITE_API_URL || "localhost";
 
 export default function Record() {
   const [form, setForm] = useState({
