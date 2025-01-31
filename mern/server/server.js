@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import records from "./routes/record.js";
-import { dirname } from 'path'
+import { dirname } from 'path';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
@@ -15,19 +15,18 @@ app.use(cors());
 app.use(express.json());
 app.use("/record", records);
 
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/dist')));
+
+// Serve the React app's index.html for any other routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
-})
+});
 
-// start the Express server
+// Start the Express server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
