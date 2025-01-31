@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import records from "./routes/record.js";
-import { dirname } from 'path';
+import { dirname } from 'path'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
@@ -21,12 +21,7 @@ const __dirname = dirname(__filename);
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/dist')));
 
-// Serve the React app's index.html for any other routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
-});
-
-// Start the Express server
+// start the Express server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
