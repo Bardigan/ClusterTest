@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const API = process.env.REACT_APP_API || "localhost";
 
 const Record = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -41,7 +46,7 @@ export default function RecordList() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:8080/record/`);
+      const response = await fetch(`http://${API}:8080/record/`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         console.error(message);
@@ -56,7 +61,7 @@ export default function RecordList() {
 
   // This method will delete a record
   async function deleteRecord(id) {
-    await fetch(`http://localhost:8080/record/${id}`, {
+    await fetch(`http://${API}:8080/record/${id}`, {
       method: "DELETE",
     });
     const newRecords = records.filter((el) => el._id !== id);
